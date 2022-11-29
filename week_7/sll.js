@@ -4,10 +4,7 @@
 Intro to Singly Linked Lists
     - OOP
     - Array VS SLL
-
 */
-
-
 class SLNode {
     constructor(value) {
         this.value = value
@@ -15,11 +12,13 @@ class SLNode {
     }
 }
 
+
+
 class SLL {
     constructor() {
         this.head = null;
     }
-    //  TUESDAY -------------------------------------------------------------------//
+    //  MONDAY -------------------------------------------------------------------//
     /**
      * Prints all the nodes in the list to the console.
      * of this list.
@@ -27,9 +26,27 @@ class SLL {
      * - Space: (?).
      * @returns {SinglyLinkedList} This list.
      */
-    printValues() {
-
+    isEmpty(){
+        if(this.head === null){
+            return true
+        }
+        return false
     }
+    printValues() {
+        // SLL IS EMPTY
+        if(this.isEmpty()){
+            console.log("SLL IS EMPTY")
+        }
+        // SLL IS NOT EMPTY
+        let runner = this.head
+        while(runner != null){
+            console.log(runner.value)
+            runner = runner.next
+        }
+    }
+
+
+    //  TUESDAY -------------------------------------------------------------------//
     /**
      * Creates a new node with the given data and inserts it at the back of
      * this list.
@@ -39,7 +56,29 @@ class SLL {
      * @returns {SinglyLinkedList} This list.
      */
     insertAtBack(data) {
-
+        // SLL IS EMPTY
+        if(this.isEmpty()) {
+            console.log("SLL is empty")
+            // CREATE A NEW NODE WITH THE GIVEN DATA
+            let newNode = new SLNode(data)
+            // POINT THE HEAD TO THE NEW NODE
+            this.head = newNode
+            // RETURN
+            return
+        }
+        // SLL NOT EMPTY
+        // CREATE A RUNNER AT THE HEAD
+        let runner = this.head;
+        // READ THE RUNNER UNTIL IT GETS TO THE LAST NODE
+        while(runner.next != null) {
+            // console.log(runner.value)
+            runner = runner.next
+        }
+        // CREATE A NEW NODE WITH THE GIVEN DATA
+        let newNode = new SLNode(data)
+        // POINT THE RUNNER"S NEXT TO THE NEW NODE
+        runner.next = newNode
+        return
     }
 
     /**
@@ -50,7 +89,10 @@ class SLL {
      * @returns {SinglyLinkedList} This list.
      */
     seedFromArr(vals) {
-
+        for(let i = 0; i < vals.length; i++) {
+            this.insertAtBack(vals[i])
+        }
+        return
     }
 
 }
@@ -61,13 +103,28 @@ class SLL {
 
 
 var sll = new SLL();
-sll.insertAtBack(1)
-sll.insertAtBack(2)
-sll.insertAtBack(3)
-sll.insertAtBack(4)
-sll.insertAtBack(5)
+// sll.insertAtBack(1)
+// sll.insertAtBack(2)
+// sll.insertAtBack(3)
+// sll.insertAtBack(4)
+// sll.insertAtBack(5)
+
+sll.seedFromArr([1,2,3,4,5])
 
 sll.printValues()
-sll.insertAtFront(10)
-sll.removeAtFront()
-sll.printValues()
+// sll.insertAtFront(10)
+// sll.removeAtFront()
+// sll.printValues()
+
+
+let slnode = new SLNode("a")
+// let runner = slnode
+// slnode.value = "b"
+// console.log(runner)
+
+// let newSLL = new SLL()
+
+let slNode1 = new SLNode('a')
+let slNode2 = new SLNode('b')
+// newSLL.head = slNode1
+// slNode1.next = slNode2
