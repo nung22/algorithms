@@ -56,11 +56,11 @@ class SLL {
      * @returns {SinglyLinkedList} This list.
      */
     insertAtBack(data) {
+        // CREATE A NEW NODE WITH THE GIVEN DATA
+        let newNode = new SLNode(data)
         // SLL IS EMPTY
         if(this.isEmpty()) {
             console.log("SLL is empty")
-            // CREATE A NEW NODE WITH THE GIVEN DATA
-            let newNode = new SLNode(data)
             // POINT THE HEAD TO THE NEW NODE
             this.head = newNode
             // RETURN
@@ -74,8 +74,6 @@ class SLL {
             // console.log(runner.value)
             runner = runner.next
         }
-        // CREATE A NEW NODE WITH THE GIVEN DATA
-        let newNode = new SLNode(data)
         // POINT THE RUNNER"S NEXT TO THE NEW NODE
         runner.next = newNode
         return
