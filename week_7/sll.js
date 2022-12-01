@@ -134,7 +134,7 @@ class SLL {
         }
         let tempNode = this.head;
         this.head = this.head.next;
-        console.log(tempNode.value)
+        // console.log(tempNode.value)
         return tempNode.value;
     }
 
@@ -177,10 +177,32 @@ class SLL {
      */
     removeBack() {
         // SLL IS EMPTY
-
+        if(this.head == null){
+            console.log("SLL IS EMPTY")
+            // RETURN
+            return null
+        }
         // SLL HAS ONE NODE
-
+        else if(this.head.next == null){
+            console.log("SLL HAS ONE NODE")
+            // RETURN
+            let temp = this.head
+            this.head = null
+            console.log(temp.value)
+            return temp.value
+        }
         // SLL IS NOT EMPTY
+        else {
+            // RETURN
+            let runner = this.head
+            while(runner.next.next != null) {
+                runner = runner.next
+            }
+            let temp = runner.next
+            runner.next = null
+            console.log(temp.value)
+            return temp.value
+        }
     }
     /**
      * Determines whether or not the given search value exists in this list.
@@ -190,12 +212,24 @@ class SLL {
      * @returns {boolean}
      */
     contains(target) {
+        // SLL IS EMPTY
+        if(this.isEmpty()){
+            return false
+        }
         // CREATE A RUNNER AT THE HEAD
+        let runner = this.head
         // HAVE THE RUNNER GO THROUGH THE SLL
+        while(runner != null) {
             // CHECK TO SEE IF THE RUNNER VALUE MATCHES THE TARGET
-            // RETURN TRUE IF THE VALUE MATCHES THE TARGET
+            if(runner.value == target) {
+                // RETURN TRUE IF THE VALUE MATCHES THE TARGET
+                return true
+            }
             // GO TO THE NEXT NODE
+            runner = runner.next;
+        }
         // RETURN FALSE IF THE RUNNER GOES OUT OF BOUNDS
+        return false
     }
     // EXTRA
     /**
@@ -208,7 +242,14 @@ class SLL {
      * @returns {boolean}
      */
     containsRecursive(val, current = this.head) {
-
+        if(current.value == val) {
+            console.log("Success")
+            return true
+        }
+        if(current != null) {
+            this.containsRecursive(val, current.next)
+        }
+        return current.value == val
     }
     //! FRIDAY ----------------------------------------------------------------------//
 
@@ -276,9 +317,15 @@ let sll = new SLL();
 // sll.insertAtBack(3)
 // sll.insertAtBack(4)
 // sll.insertAtBack(5)
-
 // sll.printValues()
+
 sll.seedFromArr([1,2,3,4,5,6])
+// sll.removeBack()
+// sll.removeBack()
+// console.log(sll.contains(4));
+// console.log(sll.contains(7));
+console.log(sll.containsRecursive(4));
+console.log(sll.containsRecursive(7));
 sll.insertAtFront(10)
 sll.removeAtFront()
 sll.printValues()
