@@ -27,7 +27,7 @@ class SLL {
      * @returns {SinglyLinkedList} This list.
      */
     isEmpty(){
-        if(this.head === null){
+        if(this.head == null){
             return true
         }
         return false
@@ -43,6 +43,7 @@ class SLL {
             console.log(runner.value)
             runner = runner.next
         }
+        console.log("~~~~~~~~~~")
     }
 
 
@@ -242,14 +243,14 @@ class SLL {
      * @returns {boolean}
      */
     containsRecursive(val, current = this.head) {
+        if(current == null) {
+            return false
+        }
         if(current.value == val) {
-            console.log("Success")
+            // console.log("Success")
             return true
         }
-        if(current != null) {
-            this.containsRecursive(val, current.next)
-        }
-        return current.value == val
+        return this.containsRecursive(val, current.next)
     }
     //! FRIDAY ----------------------------------------------------------------------//
 
@@ -263,17 +264,36 @@ class SLL {
      */
     removeVal(val) {
         // LIST IS EMPTY
-        // LIST HAS ONE NODE
+        if(this.isEmpty()){
+            return false
+        }
+        // HEAD CONTAINS THE TARGET VALUE
+        else if(this.head.value == val){
+            this.head = this.head.next
+            return true
+        }
         // LIST HAS MANY NODES
         // CREATE A RUNNER AT THE HEAD
+        let runner = this.head
         // RUN THROUGH THE SLL
+        while(runner.next != null) {
             // CHECK FOR THE RUNNERS NEXT VALUE
+            if(runner.next.value == val) {
             // IF THE VALUE IS FOUND
                 // CREATE A TEMP VARIABLE POINTING TO THE RUNNERS NEXT NODE
+                let temp = runner.next
                 // POINT THE RUNNER POINT AND SKIP TO THE NEXT NEXT NODE
+                runner.next = runner.next.next
                 // USING THE temp VARIABLE, POINT THE NEXT TO NULL
+                temp = null
                 // RETURN true
+                return true
+            }
+            // GO TO THE NEXT NODE
+            runner = runner.next;
+        }
         // RETURN false
+        return false
     }
 
     /**
@@ -284,7 +304,16 @@ class SLL {
      *    second to last node.
      */
     secondToLast() {
-
+        // LIST IS EMPTY
+        if(this.isEmpty() || this.head.next == null){
+            // RETURN
+            return null
+        }
+        let runner = this.head
+        while(runner.next.next != null) {
+            runner = runner.next;
+        }
+        return runner.value;
     }
 
     //  FRIDAY EXTRA
@@ -312,6 +341,7 @@ class SLL {
 
 let sll = new SLL();
 
+// console.log("=========== Insert At Back Test ===========")
 // sll.insertAtBack(1)
 // sll.insertAtBack(2)
 // sll.insertAtBack(3)
@@ -319,59 +349,42 @@ let sll = new SLL();
 // sll.insertAtBack(5)
 // sll.printValues()
 
-sll.seedFromArr([1,2,3,4,5,6])
+// console.log("=========== Seed From Array Test ===========")
+// sll.seedFromArr([1,2,3,4,5,6])
+// sll.printValues()
+
+// console.log("=========== Remove at Back Test ===========")
+// sll.seedFromArr([1,2,3,4,5,6])
 // sll.removeBack()
 // sll.removeBack()
+// sll.printValues()
+
+// console.log("=========== Contains & Contains Recursive Test ===========")
+// sll.seedFromArr([1,2,3,4,5,6])
 // console.log(sll.contains(4));
 // console.log(sll.contains(7));
-console.log(sll.containsRecursive(4));
-console.log(sll.containsRecursive(7));
-sll.insertAtFront(10)
-sll.removeAtFront()
+// console.log(sll.containsRecursive(4));
+// console.log(sll.containsRecursive(7));
+
+// console.log("=========== Insert At Front Test ===========")\
+// sll.seedFromArr([1,2,3,4,5,6])
+// sll.insertAtFront(10)
+// sll.printValues()
+
+sll.removeVal(4)
+// sll.removeAtFront()
 sll.printValues()
-console.log(sll.average())
+console.log(sll.secondToLast());
+// console.log(sll.average())
 
-
-let slnode = new SLNode("a")
+// let slnode = new SLNode("a")
 // let runner = slnode
 // slnode.value = "b"
 // console.log(runner)
 
 // let newSLL = new SLL()
 
-let slNode1 = new SLNode('a')
-let slNode2 = new SLNode('b')
-// newSLL.head = slNode1
-// slNode1.next = slNode2
-
-// //==========================//
-// //         TESTING          //
-// //==========================//
-
-
-// var sll = new SLL();
-// // sll.insertAtBack(1)
-// // sll.insertAtBack(2)
-// // sll.insertAtBack(3)
-// // sll.insertAtBack(4)
-// // sll.insertAtBack(5)
-
-// sll.seedFromArr([1,2,3,4,5])
-
-// sll.printValues()
-// // sll.insertAtFront(10)
-// // sll.removeAtFront()
-// // sll.printValues()
-
-
-// let slnode = new SLNode("a")
-// // let runner = slnode
-// // slnode.value = "b"
-// // console.log(runner)
-
-// // let newSLL = new SLL()
-
 // let slNode1 = new SLNode('a')
 // let slNode2 = new SLNode('b')
-// // newSLL.head = slNode1
-// // slNode1.next = slNode2
+// newSLL.head = slNode1
+// slNode1.next = slNode2
