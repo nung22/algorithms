@@ -21,6 +21,14 @@ class BinarySearchTree {
         return this.root === null;
     }
 
+        /**
+     * Retrieves the smallest integer data from this tree.
+     * - Time: O(?).
+     * - Space: O(?).
+     * @param {Node} current The node that is currently accessed from the tree as
+     *    the tree is being traversed.
+     * @returns {number} The largest integer from this tree.
+     */
     min(current = this.root) { 
         // BST IS EMPTY
         if(this.isEmpty()){
@@ -56,12 +64,24 @@ class BinarySearchTree {
      *    the tree is being traversed.
      * @returns {number} The largest integer from this tree.
      */
+    max(current = this.root) { 
+        // BST IS EMPTY
+        if(this.isEmpty()){
+            return null
+        }
+        // BST IS NOT EMPTY
+        let runner = current
+        while(runner.right !== null){
+            runner = runner.right
+        }
+        return runner.data
+    }
     maxRecursive(current = this.root) { 
         // BST IS EMPTY
         if(this.isEmpty()){
             return null;
         }
-        // BASE CASE
+        // BST IS NOT EMPTY
         if(current.right === null){
             return current.data
         }
@@ -85,6 +105,56 @@ class BinarySearchTree {
         );
 
         this.print(node.left, spaceCnt);
+    }
+
+    /**
+     * Checks if this tree contains the given searchVal.
+     * - Time: O(?).
+     * - Space: O(?).
+     * @param {Node} current The node that is currently accessed from the tree as
+     *    the tree is being traversed.
+     * @returns {boolean} Indicates if the searchVal was found.
+     */
+    contains(searchVal) { 
+        // BST IS EMPTY
+        if(this.isEmpty()){
+            return null
+        }
+        // BST IS NOT EMPTY
+        let current = this.root
+        while(current !== null){
+            if(current.data === searchVal) {
+                return true
+            }
+            if(current.right !== null && current.right.data > searchVal) {
+                current = current.right
+            }
+            if(current.left !== null && current.left.data < searchVal) {
+                current = current.left
+            }
+        }
+        return false
+    }
+    containsRecursive(searchVal, current = this.root) { 
+        // BST IS EMPTY
+        if(this.isEmpty()) {
+            return null;
+        }
+        if(current.data === searchVal) {
+            return true;
+        }
+        // VALUE IS GREATER THAN CURRENT NODE
+        if(current.right !== null && current.right.data >= searchVal) {
+            // Recursive call
+            return this.containsRecursive(searchVal, current.right)
+        }
+        // VALUE IS LESS THAN CURRENT NODE
+        if(current.left !== null && current.left.data <= searchVal) {
+            // Recursive call
+            return this.containsRecursive(searchVal, current.left)
+        }
+        // VALUE NOT FOUND
+        return false
     }
 }
 
@@ -121,5 +191,14 @@ threeLevelTree.root.left.right = new BSTNode(6);
 threeLevelTree.root.right = new BSTNode(15);
 threeLevelTree.root.right.left = new BSTNode(13);
 
-console.log(threeLevelTree.min())
+// console.log("============= MIN & MAX TEST =============");
+// console.log(threeLevelTree.min())
+
+console.log("============= Contains Test =============");
+console.log(threeLevelTree.contains(13));
+console.log(twoLevelTree.contains(13));
+console.log(emptyTree.contains(13));
+console.log(threeLevelTree.containsRecursive(10));
+console.log(twoLevelTree.containsRecursive(13));
+console.log(emptyTree.containsRecursive(13));
 threeLevelTree.print()
