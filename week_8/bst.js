@@ -156,10 +156,88 @@ class BinarySearchTree {
         // VALUE NOT FOUND
         return false
     }
+
+    /**
+     * Insert a new node with the given newVal in the right place to preserve the BST
+     * - Time: O(?).
+     * - Space: O(?).
+     * @param {Node} current The node that is currently accessed from the tree as
+     *    the tree is being traversed.
+     * @returns {BinarySearchTree} this tree.
+     */
+    insert(newVal) { 
+        // CREATE A NEW BST NODE
+        let newNode = new BSTNode(newVal)
+        // BST IS EMPTY
+        if(this.isEmpty()) {
+            // POINT ROOT TO NEW BST NODE
+            this.root = newNode
+            // RETURN THIS
+            return this
+        }
+        //BST IS NOT EMPTY
+        // SET CURRENT AT THE ROOT
+        let curr = this.root
+        // COMPARE THE newValue TO current DATA
+        while(curr !== null) {
+            // CHECK TO SEE IF THE runner LEFT or RIGHT POINTS TO ANOTHER NODE
+                // IF LEFT or RIGHT points to NULL
+                // POINT THE runner LEFT or RIGHT to the NEW BST NODE
+            if(newVal < curr.data) {
+                if (curr.left === null) {
+                    curr.left = newNode
+                    return this
+                }
+                curr = curr.left
+            } else {
+                if (curr.right === null) {
+                    curr.right = newNode
+                    return this
+                }
+                else if (newVal === curr.data) {
+                    console.log(newVal,"is already in the BST.")
+                    return this
+                }
+                curr = curr.right
+            }
+        }
+        return this
+    }
+    insertRecursive(newVal, curr = this.root) {
+        // CREATE A NEW BST NODE
+        let newNode = new BSTNode(newVal)
+        // BST IS EMPTY
+        if(this.isEmpty()) {
+            curr = newNode
+            return this
+        }
+        // BST IS NOT EMPTY
+        // newVal IS LESS THAN VALUE OF CURRENT NODE
+        if(newVal < curr.data) {
+            if (curr.left === null) {
+                curr.left = newNode
+                return this
+            }
+            // Recursive call
+            return this.insertRecursive(newVal, curr.left)
+        } 
+        // newVal IS ALREADY PRESENT IN BST
+        else if (newVal === curr.data) {
+            console.log(newVal,"is already in the BST.")
+            return this
+        }
+        // newVal IS GREATER THAN VALUE OF CURRENT NODE
+        if (curr.right === null) {
+            curr.right = newNode
+            return this
+        }
+        // Recursive call
+        return this.insertRecursive(newVal, curr.right)
+    }
 }
 
-
 // TEST CASES
+// Empty & oneLevelTree
 const emptyTree = new BinarySearchTree();
 const oneNodeTree = new BinarySearchTree();
 oneNodeTree.root = new BSTNode(10);
@@ -191,14 +269,53 @@ threeLevelTree.root.left.right = new BSTNode(6);
 threeLevelTree.root.right = new BSTNode(15);
 threeLevelTree.root.right.left = new BSTNode(13);
 
+/* fullTree
+                    root
+                <-- 25 -->
+              /            \
+            15             50
+          /    \         /    \
+        10     22      35     70
+      /   \   /  \    /  \   /  \
+    4    12  18  24  31  44 66  90
+*/
+const fullTree = new BinarySearchTree();
+fullTree
+    .insert(25)
+    .insert(15)
+    .insert(10)
+    .insert(22)
+    .insert(4)
+    .insert(12)
+    .insert(18)
+    .insert(24)
+    .insert(50)
+    .insert(35)
+    .insert(70)
+    .insert(31)
+    .insert(44)
+    .insert(66)
+    .insert(90);
+
+
 // console.log("============= MIN & MAX TEST =============");
 // console.log(threeLevelTree.min())
 
-console.log("============= Contains Test =============");
-console.log(threeLevelTree.contains(13));
-console.log(twoLevelTree.contains(13));
-console.log(emptyTree.contains(13));
-console.log(threeLevelTree.containsRecursive(10));
-console.log(twoLevelTree.containsRecursive(13));
-console.log(emptyTree.containsRecursive(13));
-threeLevelTree.print()
+// console.log("============= Contains Test =============");
+// console.log(threeLevelTree.contains(13));
+// console.log(twoLevelTree.contains(13));
+// console.log(emptyTree.contains(13));
+// console.log(threeLevelTree.containsRecursive(10));
+// console.log(twoLevelTree.containsRecursive(13));
+// console.log(emptyTree.containsRecursive(13));
+// threeLevelTree.print()
+
+console.log("============= Insert Test =============");
+// fullTree.print()
+// fullTree.insert(3)
+// fullTree.insert(10)
+fullTree.insertRecursive(91)
+fullTree.insertRecursive(65)
+fullTree.insertRecursive(64)
+fullTree.insertRecursive(10)
+fullTree.print()
