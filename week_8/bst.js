@@ -234,6 +234,18 @@ class BinarySearchTree {
         // Recursive call
         return this.insertRecursive(newVal, curr.right)
     }
+
+    toArrInorder(node = this.root, vals = []) {
+        if(node !== null) {
+            // Recursive call to left
+            this.toArrInorder(node.left, vals)
+            // Add node data to array
+            vals.push(node.data)
+            // Recursive call to right
+            this.toArrInorder(node.right, vals)
+        }
+        return vals
+    }
 }
 
 // TEST CASES
@@ -310,12 +322,17 @@ fullTree
 // console.log(emptyTree.containsRecursive(13));
 // threeLevelTree.print()
 
-console.log("============= Insert Test =============");
+// console.log("============= Insert Test =============");
 // fullTree.print()
 // fullTree.insert(3)
 // fullTree.insert(10)
-fullTree.insertRecursive(91)
-fullTree.insertRecursive(65)
-fullTree.insertRecursive(64)
-fullTree.insertRecursive(10)
+// fullTree.insertRecursive(91)
+// fullTree.insertRecursive(65)
+// fullTree.insertRecursive(64)
+// fullTree.insertRecursive(10)
+// fullTree.print()
+
+console.log("============= Array In Order Test =============");
 fullTree.print()
+// vals = [];
+console.log(fullTree.toArrInorder())
