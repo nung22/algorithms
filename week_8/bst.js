@@ -234,7 +234,6 @@ class BinarySearchTree {
         // Recursive call
         return this.insertRecursive(newVal, curr.right)
     }
-
     toArrInorder(node = this.root, vals = []) {
         if(node !== null) {
             // Recursive call to left
@@ -245,6 +244,59 @@ class BinarySearchTree {
             this.toArrInorder(node.right, vals)
         }
         return vals
+    }
+
+    /**
+     * Recursively counts the total number of nodes in this tree.
+     * - Time: O(?).
+     * - Space: O(?).
+     * @param {Node} node The current node during the traversal of this tree.
+     * @returns {number} The total number of nodes.
+     */
+    size(node = this.root) {
+        if(node === null) {
+            return null
+        }
+        return 1 + this.size(node.left) + this.size(node.right)
+    }
+    /**
+     * Calculates the height of the tree which is based on how many nodes from
+     * top to bottom (whichever side is taller).
+     * - Time: O(?).
+     * - Space: O(?).
+     * @param {Node} node The current node during traversal of this tree.
+     * @returns {number} The height of the tree.
+     */
+    height(node = this.root) {
+        if(node === null) {
+            return null
+        }
+        let left =  this.height(node.left)
+        let right = this.height(node.right)
+        if( left > right){
+            return 1 + left
+        }
+        return 1 + right
+    }
+    /**
+     * Determine whether the BST is balanced, for a BST to be balanced,
+     * a Node's left and right height must have a max difference of 1 AND
+     * all Nodes in the tree must be balanced as well.
+     * - Time: O(?).
+     * - Space: O(?).
+     * @param {Node} node The current node during traversal of this tree.
+     * @returns {number} The height of the tree.
+     */
+    isBalanced(node = this.root) {
+        if(node === null) {
+            return true
+        }
+        let left = this.height(node.left)
+        let right = this.height(node.right)
+        if(Math.abs(left - right) <= 1 && this.isBalanced(node.left) && this.isBalanced(node.right)) {
+            return true 
+        }
+        return false
     }
 }
 
@@ -304,9 +356,9 @@ fullTree
     .insert(50)
     .insert(35)
     .insert(70)
-    .insert(31)
-    .insert(44)
-    .insert(66)
+    // .insert(31)
+    // .insert(44)
+    // .insert(66)
     .insert(90);
 
 
@@ -335,4 +387,10 @@ fullTree
 console.log("============= Array In Order Test =============");
 fullTree.print()
 // vals = [];
-console.log(fullTree.toArrInorder())
+// console.log(fullTree.toArrInorder())
+
+console.log("============= Size, Height Test =============");
+fullTree.print()
+console.log(fullTree.size());
+console.log(fullTree.height());
+console.log(fullTree.isBalanced());
