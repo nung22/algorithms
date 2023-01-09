@@ -177,6 +177,21 @@ class Queue {
         return palindrome;
     }
 
+    /**
+     * Determines whether the sum of the left half of the queue items is equal to
+     * the sum of the right half. Avoid indexing the queue items directly via
+     * bracket notation, use the queue methods instead for practice.
+     * Use no extra array or objects.
+     * The queue should be returned to it's original order when done.
+     * - Time: O(?).
+     * - Space: O(?).
+     * @returns {boolean} Whether the sum of the left and right halves is equal.
+     */
+    isSumOfHalvesEqual() {
+        let leftSum = 0;
+        let rightSum = 0;
+        for()
+    }
 }
 
 class QueueNode {
@@ -185,39 +200,6 @@ class QueueNode {
         this.next = null;
     }
 }
-
-
-let test = new Queue()
-test.enqueue('a')
-test.enqueue('b')
-test.enqueue('c')
-test.enqueue('b')
-test.enqueue('a')
-console.log(test.isPalindrome()) // true
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 class LinkedQueue {
     constructor() {
@@ -292,5 +274,32 @@ class LinkedQueue {
 // console.log(queue1.size());
 // console.log("~>~>~>~>~>~>~>~>~>~>~>~>~>~>~>~>~>~>~~>~>")
 
+// let test = new Queue()
+// test.enqueue('a')
+// test.enqueue('b')
+// test.enqueue('c')
+// test.enqueue('b')
+// test.enqueue('a')
+// console.log(test.isPalindrome()) // true
+
+var q1 = Queue()
+
+q1.enqueue(1)
+q1.enqueue(2)
+q1.enqueue(3)
+q1.enqueue(3)
+q1.enqueue(2)
+q1.enqueue(1)
+
+q1.isSumOfHalvesEqual() // true
+
+var q2 = Queue()
+
+q2.enqueue(5)
+q2.enqueue(2)
+q2.enqueue(1)
+q2.enqueue(1)
+
+q2.isSumOfHalvesEqual() // false
 
 
