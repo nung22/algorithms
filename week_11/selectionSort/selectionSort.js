@@ -1,45 +1,55 @@
 /* 
-  https://www.hackerearth.com/practice/algorithms/sorting/selection-sort/visualize/
-  Stable
-  Time Complexity
-    - Best: O(n) linear when array is already sorted.
-    - Average: O(n^2) quadratic.
-    - Worst: O(n^2) quadratic when the array is reverse sorted.
+  https://visualgo.net/en/sorting
+    
+  Selection sort works by iterating through the list, finding the minimum
+  value, and moving it to the beginning of the list. Then, ignoring the first
+  position, which is now sorted, iterate through the list again to find the
+  next minimum value and move it to index 1. This continues until all values
+  are sorted.
+  
+  Unstable sort.
+  
+  Time Complexity:
+    Worst Case: O(n^2) quadratic
   Space: O(1) constant.
-  For review, create a function that uses SelectionSort to sort an unsorted array in-place.
-  Find the minimum element in the array, then swap with the element in the first position and continue until array is fully sorted
+  Selection sort is one of the slower sorts.
+  - ideal for: pagination, where page 1 displays 10 records for example,
+      you run selection sort for 10 iterations only to display the first 10
+      sorted items.
 */
 
-// const numsOrdered = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-// const numsRandomOrder = [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
-// const numsReversed = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-// const expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const numsOrdered = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const numsRandomOrder = [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
+const numsReversed = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+const expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 /**
- * Sorts the given nums in-place by mutating the array.
- * Best: O(n^2) quadratic when array is already sorted.
- * Average: O(n^2) quadratic.
- * Worst: O(n^2) quadratic when the array is reverse sorted.
+ * Sorts given array in-place.
  * @param {Array<number>} nums
- * @returns {Array<number>} The given nums after being sorted.
+ * @returns {Array<number>} The given array after being sorted.
  */
-const selectionSort = (nums = []) => {
-  // iterate through the array nums where 'i' is the index
-  // of the minimum value in the unsorted portion of nums
-  for(let i = 0; i < nums.length; i++) {
-    // iterate through unsorted portion of nums starting at
-    // the element to the right of the minimum value
-    for(let j = i + 1; j < nums.length; j++) {
-      // if an element in the unsorted array is less than
-      // the minimum value, swap the two elements
-      if(nums[j] < nums[i]) {
-        let temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
+function selectionSort(nums = []) {
+  // iterate through the array nums
+  for( let i = 0; i < nums.length; i++) {
+    // stores index of minimum value
+    let mindex = i;
+    // iterate through the unsorted portion of the array by starting
+    // at the index to the right of 'i'
+    for (let j = i + 1; j < nums.length; j++) {
+      // if a value is less than the min, make 'j' the new 'mindex'
+      if(nums[j] < nums[mindex]) {
+        mindex = j;
       }
     }
+    // swap the value at the front of the unsorted array with the
+    // minimum value
+    if(mindex !== i){
+      let temp = nums[i];
+      nums[i] = nums[mindex];
+      nums[mindex] = temp;
+    }
   }
-  return nums; // return sorted array
+  return nums; // return the sorted array
 }
 
 // console.log(selectionSort(numsOrdered));
