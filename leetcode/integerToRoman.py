@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/integer-to-roman
 
-#* 12. Integer to Roman=
+#* 12. Integer to Roman
 
 class Solution:
     def intToRoman(self, num: int) -> str:
