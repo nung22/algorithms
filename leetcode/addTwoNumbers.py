@@ -22,5 +22,4 @@ class Solution:
         for i in res:
             d.next = ListNode(i)
             d = d.next
-        return n.next    
-
+        return n.next
