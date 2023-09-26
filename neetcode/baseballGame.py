@@ -24,5 +24,4 @@ class Solution:
                 
             else: 
                 score_stack.append(int(o))
-
         return sum(score_stack)
