@@ -15,7 +15,6 @@ class Solution:
             l += 1
             r -= 1
         return True
-
     # Could write own alpha-numeric function
     def alphanum(self, c):
         return (
