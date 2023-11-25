@@ -3,7 +3,6 @@
 # * 155. Min Stack
 
 class MinStack:
-
     def __init__(self):
         self.stack = []
         self.minStack = []
